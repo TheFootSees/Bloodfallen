@@ -2,6 +2,8 @@ package net.albedo.bloodfallen.engine.wrappers.client;
 
 import java.lang.reflect.Modifier;
 
+import org.objectweb.asm.Opcodes;
+
 import net.albedo.bloodfallen.engine.mapper.DiscoveryMethod;
 import net.albedo.bloodfallen.engine.mapper.Mapper;
 import net.albedo.bloodfallen.engine.wrappers.Wrapper;
@@ -26,6 +28,12 @@ public interface Minecraft extends Wrapper {
 	@DiscoveryMethod(checks = Mapper.DEFAULT | Mapper.FIELD)
 	public GameSettings getGameSettings();
 
+	@DiscoveryMethod(checks = Mapper.CUSTOM | Mapper.FIELD)
+	public int getRightClickDelayTimer();
+
+	@DiscoveryMethod(checks = Mapper.CUSTOM | Mapper.FIELD)
+	public void setRightClickDelayTimer(int delay);
+	
 	@DiscoveryMethod(checks = Mapper.CUSTOM | Mapper.FIELD)
 	public int getLeftClickDelay();
 
@@ -57,7 +65,11 @@ public interface Minecraft extends Wrapper {
 
 	@DiscoveryMethod(checks = Mapper.DEFAULT | Mapper.STRING_CONST, constants = "Null returned as \'hitResult\', this shouldn't happen!")
 	public void clickMouse();
-
+	
 	@DiscoveryMethod(checks = Mapper.DEFAULT | Mapper.STRING_CONST, constants = "Ticking screen")
 	public void tick();
+	
+	@DiscoveryMethod(checks = Mapper.DEFAULT | Mapper.STRING_CONST, constants = "Updating screen events")
+	public void runTick();
+	
 }

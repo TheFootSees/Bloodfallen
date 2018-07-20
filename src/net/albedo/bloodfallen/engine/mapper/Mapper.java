@@ -126,6 +126,17 @@ public class Mapper {
 			return null;
 		});
 		
+		mapper.register(ASMUtils.getMethod(Minecraft.class, "getRightClickDelayTimer()I"), m -> {
+			final Method method = m.getMappedMethod(ASMUtils.getMethod(Minecraft.class, "runTick()V"));
+			if (method != null) {
+				final Field field = m.getMappedClass(Minecraft.class).getDeclaredField(((FieldInsnNode) ASMUtils.getFirst(ASMUtils.getMethodNode(method).instructions, Opcodes.GETFIELD)).name);
+				m.mappedFields.put(ASMUtils.getMethod(Minecraft.class, "setRightClickDelayTimer(I)V"), field);
+				return field;
+			}
+			return null;
+		});
+		
+		
 		mapper.register(PlayerSp.class);
 		mapper.register(ClientPlayer.class);
 		mapper.register(EntityPlayer.class);

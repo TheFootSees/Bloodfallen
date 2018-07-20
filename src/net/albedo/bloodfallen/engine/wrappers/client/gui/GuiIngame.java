@@ -1,5 +1,7 @@
 package net.albedo.bloodfallen.engine.wrappers.client.gui;
 
+import org.objectweb.asm.Opcodes;
+
 import net.albedo.bloodfallen.engine.hooker.Hooker;
 import net.albedo.bloodfallen.engine.hooker.HookingMethod;
 import net.albedo.bloodfallen.engine.hooker.impl.Render2DEvent;

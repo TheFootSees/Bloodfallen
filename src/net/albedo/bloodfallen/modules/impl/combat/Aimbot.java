@@ -27,16 +27,17 @@ public class Aimbot extends Module {
 
 	private Random random = new Random();
 	public static SliderValue aimFov;
-	public static SliderValue maximumRotation;
-	public static SliderValue minimumRotation;
+	public static SliderValue yawSpeed;
+	public static SliderValue pitchSpeed;
 
 	public Aimbot() {
 		super(new AbstractValue[] {
 				aimFov = new SliderValue("AimFov", "aimFov.bloodfallen", Albedo.valuesRegistry, 180, 1, 360, true),
-				maximumRotation = new SliderValue("MaxRotation", "maxRot.bloodfallen", Albedo.valuesRegistry, 20, 1,
+				yawSpeed = new SliderValue("YawSpeed", "yawSpeed.bloodfallen", Albedo.valuesRegistry, 20, 0,
 						100, true),
-				minimumRotation = new SliderValue("MinRotation", "minRot.bloodfallen", Albedo.valuesRegistry, 20, 1,
-						100, true) });
+				pitchSpeed = new SliderValue("PitchSpeed", "pitchSpeed.bloodfallen", Albedo.valuesRegistry, 20, 0,
+						100, true),
+		});
 	}
 
 	@EventTarget
@@ -53,8 +54,8 @@ public class Aimbot extends Module {
 							Entity p = WrapperDelegationHandler.createWrapperProxy(Entity.class, obj);
 							if (Albedo.getIrrlicht().getDistanceToEntity(p) <= 4.0F) {
 								if (canBeHit(p)) {
-									faceEntity(p, maximumRotation.getValue().floatValue() / 10.0F,
-											minimumRotation.getValue().floatValue());
+									faceEntity(p, yawSpeed.getValue().floatValue() / 10.0F,
+											pitchSpeed.getValue().floatValue() / 10);
 								}
 							}
 						}
@@ -127,8 +128,8 @@ public class Aimbot extends Module {
 		double var14 = MathHelper.sqrt_double(diffX * diffX + diffZ * diffZ);
 		float var12 = (float) (Math.atan2(diffZ, diffX) * 180.0D / Math.PI) - 90.0F;
 		float var13 = (float) -(Math.atan2(yDifference, var14) * 180.0D / Math.PI);
-		Albedo.getMinecraft().getPlayer()
-				.setRotationYaw(updateRotation(Albedo.getMinecraft().getPlayer().getRotationYaw(), var12, yaw));
+		Albedo.getMinecraft().getPlayer().setRotationYaw(updateRotation(Albedo.getMinecraft().getPlayer().getRotationYaw(), var12, yaw));
+		Albedo.getMinecraft().getPlayer().setRotationPitch(updateRotation(Albedo.getMinecraft().getPlayer().getRotationPitch(), var13, pitch));
 	}
 
 	private float updateRotation(float p_70663_1_, float p_70663_2_, float p_70663_3_) {

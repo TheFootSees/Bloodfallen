@@ -10,6 +10,7 @@ import net.albedo.bloodfallen.engine.events.EventManager;
 import net.albedo.bloodfallen.modules.impl.combat.Aimbot;
 import net.albedo.bloodfallen.modules.impl.combat.AutoClicker;
 import net.albedo.bloodfallen.modules.impl.combat.Velocity;
+import net.albedo.bloodfallen.modules.impl.misc.FastPlace;
 import net.albedo.bloodfallen.modules.impl.misc.Timer;
 import net.albedo.bloodfallen.modules.impl.misc.Uninject;
 import net.albedo.bloodfallen.modules.impl.movement.Fly;
@@ -27,6 +28,7 @@ public class ModuleManager {
 		
 		modules.add(new AutoClicker());	
 		modules.add(new Velocity());
+		modules.add(new FastPlace());
 		modules.add(new Aimbot());
 		modules.add(new Speed());
 		modules.add(new ESP());
